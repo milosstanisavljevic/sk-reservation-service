@@ -10,13 +10,16 @@ public class RoomType {
     private Integer id;
     @Column
     private String type;
+    @ManyToOne
+    private Hotel hotel;
 
     public RoomType(){
 
     }
 
-    public RoomType(String type) {
+    public RoomType(String type,Hotel hotel) {
         this.type = type;
+        this.hotel = hotel;
     }
 
     public Integer getId() {
@@ -33,5 +36,13 @@ public class RoomType {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }
