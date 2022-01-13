@@ -1,5 +1,6 @@
 package com.raf.reservationservice.controller;
 
+import com.raf.reservationservice.dto.RecenzijaCreateDto;
 import com.raf.reservationservice.dto.ReservationCreateDto;
 import com.raf.reservationservice.service.ReservationService;
 import org.springframework.http.HttpStatus;
@@ -21,9 +22,14 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Void> addReservation(@RequestBody @Valid ReservationCreateDto reservationCreateDto) {
         reservationService.addReservation(reservationCreateDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    @PostMapping("/recenzija")
+    public ResponseEntity<Void> addRecenzija(@RequestBody RecenzijaCreateDto recenzijaCreateDto){
+        reservationService.addRecenzija(recenzijaCreateDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
