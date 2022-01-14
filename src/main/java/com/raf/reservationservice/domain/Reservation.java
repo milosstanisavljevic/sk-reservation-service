@@ -14,13 +14,15 @@ public class Reservation {
     private Double pricePerDay;
     @OneToOne
     private RoomType roomType;
-
+    @OneToOne
+    private Termin termin;
     public Reservation(){}
 
-    public Reservation(Integer userId, Double pricePerDay, RoomType roomType) {
+    public Reservation(Integer userId, Double pricePerDay, RoomType roomType,Termin termin) {
         this.userId = userId;
         this.pricePerDay = pricePerDay;
         this.roomType = roomType;
+        this.termin = termin;
     }
 
     public Integer getId() {
@@ -53,5 +55,13 @@ public class Reservation {
 
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
+    }
+
+    public Termin getTermin() {
+        return termin;
+    }
+
+    public void setTermin(Termin termin) {
+        this.termin = termin;
     }
 }

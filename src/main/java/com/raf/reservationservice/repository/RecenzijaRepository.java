@@ -2,6 +2,8 @@ package com.raf.reservationservice.repository;
 
 import com.raf.reservationservice.domain.Recenzija;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface RecenzijaRepository extends JpaRepository<Recenzija,Long> {
+@Repository
+public interface RecenzijaRepository extends JpaRepository<Recenzija,Integer> {
 }

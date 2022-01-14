@@ -1,14 +1,15 @@
 package com.raf.reservationservice.controller;
 
+import com.raf.reservationservice.domain.Termin;
+import com.raf.reservationservice.dto.HotelCreateDto;
 import com.raf.reservationservice.dto.RecenzijaCreateDto;
 import com.raf.reservationservice.dto.ReservationCreateDto;
 import com.raf.reservationservice.service.ReservationService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -22,6 +23,7 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
+
     @PostMapping("/add")
     public ResponseEntity<Void> addReservation(@RequestBody @Valid ReservationCreateDto reservationCreateDto) {
         reservationService.addReservation(reservationCreateDto);
@@ -32,4 +34,19 @@ public class ReservationController {
         reservationService.addRecenzija(recenzijaCreateDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+    @PostMapping("/dodavanjeHotela")
+    public ResponseEntity<Void> addHotel(@RequestBody HotelCreateDto hotelCreateDto){
+        reservationService.addHotel(hotelCreateDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    @DeleteMapping("/otkaziRezervaciju/{id}")
+    public ResponseEntity<?> delete(@PathVariable Integer id){
+        reservationService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/listaTermina")
+    public ResponseEntity<Page<Termin>> findAll(Pageable pageable) {
+        return new ResponseEntity<>(reservationService.findAll(pageable), HttpStatus.OK);
+    }
+
 }
